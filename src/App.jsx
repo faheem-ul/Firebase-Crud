@@ -15,9 +15,35 @@ import {
 function App() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editUserId, setEditUserID] = useState(null);
 
-  const createuser = (e) => {
+  const usersCollectionref = collection(db, "users");
+
+  const createuser = async (e) => {
     e.preventDefault();
+    try {
+      if (isEditing) {
+        await updateDoc(doc(db, "users", editUserId), {
+          Name: name,
+          Age: age,
+        });
+        console.log("user updated against Id", editUserId);
+      } else {
+        const doc = await addDoc(usersCollectionref, {
+          Name: name,
+          Age: age,
+        });
+
+        console.log("user added", doc.id);
+        setAge("");
+        setName("");
+        setIsEditing(false);
+        setEditUserID(null);
+      }
+    } catch (err) {
+      console.log("user not added ", err);
+    }
   };
 
   return (
@@ -35,6 +61,7 @@ function App() {
           value={age}
           onChange={(e) => setAge(e.target.value)}
         />
+        <button type="submit">submit</button>
       </form>
     </>
   );
