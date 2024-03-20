@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   addDoc,
@@ -15,6 +15,7 @@ import {
 function App() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
+  const [users, setUsers] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editUserId, setEditUserID] = useState(null);
 
@@ -46,6 +47,23 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const q = query(usersCollectionref);
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const usersAray = [];
+      snapshot.forEach((doc) => {
+        const user = { id: doc.id, ...doc.data() };
+        // console.log(user);
+        usersAray.push(user);
+        setUsers(user);
+      });
+      setUsers(usersAray);
+    });
+    return () => unsubscribe();
+  }, []);
+  // console.log(users);
+
   return (
     <>
       <form onSubmit={createuser}>
@@ -63,6 +81,13 @@ function App() {
         />
         <button type="submit">submit</button>
       </form>
+      {users.map((user, index) => (
+        <li key={index}>
+          Name: {user.Name}, Age: {user.Age}
+          {/* <button onClick={() => handleEdit(user)}>Edit</button> */}
+          {/* <button onClick={() => handleDelete(user)}>Delete</button> */}
+        </li>
+      ))}
     </>
   );
 }
