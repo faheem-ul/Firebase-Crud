@@ -64,6 +64,13 @@ function App() {
   }, []);
   // console.log(users);
 
+  const handleEdit = async (user) => {
+    setName(user.Name);
+    setAge(user.Age);
+    setIsEditing(true);
+    setEditUserID(user.id);
+  };
+
   return (
     <>
       <form onSubmit={createuser}>
@@ -84,7 +91,7 @@ function App() {
       {users.map((user, index) => (
         <li key={index}>
           Name: {user.Name}, Age: {user.Age}
-          {/* <button onClick={() => handleEdit(user)}>Edit</button> */}
+          <button onClick={() => handleEdit(user)}>Edit</button>
           {/* <button onClick={() => handleDelete(user)}>Delete</button> */}
         </li>
       ))}
