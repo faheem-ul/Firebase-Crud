@@ -71,6 +71,11 @@ function App() {
     setEditUserID(user.id);
   };
 
+  const handleDelete = (user) => {
+    // console.log(user.id);
+    deleteDoc(doc(db, "users", user.id));
+  };
+
   return (
     <>
       <form onSubmit={createuser}>
@@ -92,7 +97,7 @@ function App() {
         <li key={index}>
           Name: {user.Name}, Age: {user.Age}
           <button onClick={() => handleEdit(user)}>Edit</button>
-          {/* <button onClick={() => handleDelete(user)}>Delete</button> */}
+          <button onClick={() => handleDelete(user)}>Delete</button>
         </li>
       ))}
     </>
