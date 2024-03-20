@@ -77,30 +77,55 @@ function App() {
   };
 
   return (
-    <>
+    <div className=" w-screen h-screen flex flex-col justify-center items-center">
       <form onSubmit={createuser}>
         <input
+          className=" block p-5 w-[20rem] bg-gray-700 text-white rounded-3xl border-2 border-black mb-5"
           type="text"
           value={name}
           placeholder="Enter your Name"
           onChange={(e) => setName(e.target.value)}
         />
         <input
+          className=" block p-5 w-80 bg-gray-700 text-white rounded-3xl border-2 border-black"
           type="number"
           placeholder="Enter your Age"
           value={age}
           onChange={(e) => setAge(e.target.value)}
         />
-        <button type="submit">submit</button>
+        <button
+          className=" bg-green-700 mt-5 mb-5 rounded-2xl p-3 w-80"
+          type="submit"
+        >
+          Add
+        </button>
       </form>
-      {users.map((user, index) => (
-        <li key={index}>
-          Name: {user.Name}, Age: {user.Age}
-          <button onClick={() => handleEdit(user)}>Edit</button>
-          <button onClick={() => handleDelete(user)}>Delete</button>
-        </li>
-      ))}
-    </>
+      <ul>
+        {users.map((user, index) => (
+          <li
+            key={index}
+            className="   rounded-lg flex items-center justify-center text-center gap-3 p-2"
+          >
+            <span className=" text-2xl font-bold">Name:</span>
+            <span className=" text-xl font-medium">{user.Name}</span>
+            <span className=" text-2xl font-bold">Age:</span>
+            <span className=" text-xl font-medium">{user.Age}</span>
+            <button
+              className=" bg-yellow-700 mt-5 mb-5 rounded-2xl p-2 w-40 font-medium text-[17px]"
+              onClick={() => handleEdit(user)}
+            >
+              Edit
+            </button>
+            <button
+              className=" bg-red-700 mt-5 mb-5 rounded-2xl p-2 w-40 font-medium text-[17px]"
+              onClick={() => handleDelete(user)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
