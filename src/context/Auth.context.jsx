@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { createContext } from "react";
-// import { FirebaseApp } from "firebase/app";
+
 import PropTypes from "prop-types";
 
 import { auth } from "../firebase.confog";

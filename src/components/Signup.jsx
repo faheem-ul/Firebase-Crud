@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-import { auth } from "../firebase.confog";
-// import { db, addDoc, doc } from "../firebase.confog";
+import { auth, db, doc, setDoc } from "../firebase.confog";
 
 function Signup() {
   const [signupEmail, setSignupEmail] = useState("");
@@ -26,12 +25,17 @@ function Signup() {
       const uid = userCredential.user.uid;
 
       console.log(uid);
-      //   const userData = { email: signupEmail, password: signupPass, uid: uid };
 
       //   doc(uid, userData);
-      //   const userCollectionRef = doc(db, "signups", uid);
 
-      //   addDoc(userCollectionRef, userData);
+      const userData = { email: signupEmail, password: signupPass, uid: uid };
+      //   const userCollectionRef = doc(db, "signupUsers", uid);
+      //   const userDocref = doc(userCollectionRef, uid);
+
+      //   await addDoc(userCollectionRef, userData);
+
+      //   firebase.firestore().collection("accounts").doc(uid).set(userData);
+      await setDoc(doc(db, "signupUsers", uid), userData);
 
       navigate("/crud");
     } catch (error) {
@@ -66,6 +70,13 @@ function Signup() {
           Sign Up
         </button>
       </form>
+      <p>
+        Already have an account{" "}
+        <span className=" text-red-500 underline">
+          {" "}
+          <Link to="/login">Login</Link>{" "}
+        </span>
+      </p>
     </div>
   );
 }

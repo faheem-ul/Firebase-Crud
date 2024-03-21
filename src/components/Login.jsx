@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { auth } from "../firebase.confog";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -54,6 +54,13 @@ function Signup() {
           LogIn
         </button>
       </form>
+      <p>
+        Don't have an account{" "}
+        <span className=" text-red-500 underline">
+          {" "}
+          <Link to="/">SignUp</Link>{" "}
+        </span>
+      </p>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import {
   onSnapshot,
   deleteDoc,
   updateDoc,
+  setDoc,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
@@ -46,4 +47,5 @@ export {
   onSnapshot,
   deleteDoc,
   updateDoc,
+  setDoc,
 };

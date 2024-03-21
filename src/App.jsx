@@ -14,7 +14,7 @@ import Login from "./components/Login";
 
 function App() {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  console.log("context user", user);
   return (
     <Router>
       <Routes>
