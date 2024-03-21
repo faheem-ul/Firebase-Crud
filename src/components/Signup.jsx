@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import { auth } from "../firebase.confog";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { db, addDoc, doc } from "../firebase.confog";
 
 function Signup() {
   const [signupEmail, setSignupEmail] = useState("");
@@ -10,7 +11,7 @@ function Signup() {
   //   console.log(signupEmail, signupPass);
 
   const navigate = useNavigate();
-
+  //   console.log("currentUser", auth.currentUser);
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
@@ -20,7 +21,18 @@ function Signup() {
         signupEmail,
         signupPass
       );
-      console.log(userCredential);
+      console.log("sign up user credentials", userCredential);
+
+      const uid = userCredential.user.uid;
+
+      console.log(uid);
+      //   const userData = { email: signupEmail, password: signupPass, uid: uid };
+
+      //   doc(uid, userData);
+      //   const userCollectionRef = doc(db, "signups", uid);
+
+      //   addDoc(userCollectionRef, userData);
+
       navigate("/crud");
     } catch (error) {
       console.log("error is signup", error);

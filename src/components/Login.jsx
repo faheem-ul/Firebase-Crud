@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { auth } from "../firebase.confog";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Signup() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -13,22 +14,22 @@ function Signup() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
-    // try {
-    //   const userCredential = await createUserWithEmailAndPassword(
-    //     auth,
-    //     signupEmail,
-    //     signupPass
-    //   );
-    //   console.log(userCredential);
-    //   navigate("/crud");
-    // } catch (error) {
-    //   console.log("error is signup", error);
-    // }
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPass
+      );
+      console.log("login user credentials", userCredential);
+      navigate("/crud");
+    } catch (error) {
+      console.log("error is login", error);
+    }
   };
 
   return (
     <div className=" h-screen w-screen flex flex-col justify-center items-center">
-      <h1 className=" text-[30px] font-bold mb-5">Signup</h1>
+      <h1 className=" text-[30px] font-bold mb-5">LogIn</h1>
       <form onSubmit={handleLoginSubmit}>
         <input
           type="email"
@@ -50,7 +51,7 @@ function Signup() {
           type="submit"
           className=" bg-green-700 mt-5 mb-5 rounded-2xl p-3 w-80"
         >
-          Sign Up
+          LogIn
         </button>
       </form>
     </div>

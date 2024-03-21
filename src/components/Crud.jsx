@@ -10,7 +10,9 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  auth,
 } from "../firebase.confog";
+import { useNavigate } from "react-router-dom";
 
 function Crud() {
   const [name, setName] = useState("");
@@ -20,6 +22,8 @@ function Crud() {
   const [editUserId, setEditUserID] = useState(null);
 
   const usersCollectionref = collection(db, "users");
+
+  const navigate = useNavigate();
 
   const createuser = async (e) => {
     e.preventDefault();
@@ -76,6 +80,12 @@ function Crud() {
     deleteDoc(doc(db, "users", user.id));
   };
 
+  const handleLogOut = () => {
+    auth.signOut();
+    console.log("user logged out");
+    navigate("/");
+  };
+
   return (
     <div className=" w-screen h-screen flex flex-col justify-center items-center">
       <form onSubmit={createuser}>
@@ -125,6 +135,12 @@ function Crud() {
           </li>
         ))}
       </ul>
+      <button
+        className=" bg-red-700 mt-5 mb-5 rounded-2xl p-2 w-40 font-medium text-[17px]"
+        onClick={() => handleLogOut()}
+      >
+        LogOut
+      </button>
     </div>
   );
 }
