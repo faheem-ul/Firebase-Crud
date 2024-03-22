@@ -14,7 +14,8 @@ import {
 } from "../firebase.confog";
 import { useNavigate } from "react-router-dom";
 
-function Crud() {
+function Crud(props) {
+  const { restricted, user } = props || {};
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [users, setUsers] = useState([]);
@@ -88,6 +89,7 @@ function Crud() {
 
   return (
     <div className=" w-screen h-screen flex flex-col justify-center items-center">
+      <h1 className=" text-[30px] font-bold mb-5">CRUD Operations</h1>
       <form onSubmit={createuser}>
         <input
           className=" block p-5 w-[20rem] bg-gray-700 text-white rounded-3xl border-2 border-black mb-5"

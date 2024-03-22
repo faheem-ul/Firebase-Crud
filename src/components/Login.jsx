@@ -58,7 +58,7 @@ function Signup() {
         Don't have an account{" "}
         <span className=" text-red-500 underline">
           {" "}
-          <Link to="/">SignUp</Link>{" "}
+          <Link to="/signup">SignUp</Link>{" "}
         </span>
       </p>
     </div>
