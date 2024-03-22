@@ -13,8 +13,8 @@ import Login from "./components/Login";
 
 function App() {
   const { user, loading } = useContext(AuthContext);
-  console.log("context user", user);
-  console.log("loading", loading);
+  // console.log("context user", user);
+  // console.log("loading", loading);
 
   return (
     <Router>

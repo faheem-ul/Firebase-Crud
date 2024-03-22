@@ -14,8 +14,7 @@ import {
 } from "../firebase.confog";
 import { useNavigate } from "react-router-dom";
 
-function Crud(props) {
-  const { restricted, user } = props || {};
+function Crud() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [users, setUsers] = useState([]);
@@ -36,7 +35,8 @@ function Crud(props) {
         });
         console.log("user updated against Id", editUserId);
       } else {
-        const doc = await addDoc(usersCollectionref, {
+        // const doc =
+        await addDoc(usersCollectionref, {
           Name: name,
           Age: age,
         });
