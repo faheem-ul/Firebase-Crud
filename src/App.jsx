@@ -14,23 +14,28 @@ import Login from "./components/Login";
 function App() {
   const { user, loading } = useContext(AuthContext);
   console.log("context user", user);
+  console.log("loading", loading);
 
   return (
     <Router>
       {!loading && (
         <Routes>
           {/* public routes */}
-          <Route path="/" element={<Home />} />
+          <Route element={<PublicRoutes user={user} loading={loading} />}>
+            <Route path="/" element={<Home />} />
+          </Route>
 
           {/* public and restricted routes */}
-          <Route element={<PublicRoutes restricted user={user} />}>
+          <Route
+            element={<PublicRoutes restricted user={user} loading={loading} />}
+          >
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
           </Route>
 
           {/* private routes */}
 
-          <Route path="crud" element={<PrivateRoutes />}>
+          <Route path="/" element={<PrivateRoutes />}>
             <Route path="/crud" element={<Crud />} exact />
           </Route>
         </Routes>
